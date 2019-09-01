@@ -68,7 +68,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -79,7 +79,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -92,18 +92,18 @@ TextureImporter:
       name: PGhost-side_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 69
-        width: 26
-        height: 26
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e921610cb7b064e97addd2939654f6a1
+      spriteID: 2baed1dc6264c4af094a4bd58294ffce
       vertices: []
       indices: 
       edges: []
@@ -112,18 +112,18 @@ TextureImporter:
       name: PGhost-side_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 68
-        width: 26
-        height: 26
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f719fdb97bc034582bc26ec35d6547f5
+      spriteID: a44ccd300d9c14e9fb67190f1f171f1b
       vertices: []
       indices: 
       edges: []
@@ -132,18 +132,18 @@ TextureImporter:
       name: PGhost-side_2
       rect:
         serializedVersion: 2
-        x: 3
-        y: 35
-        width: 26
-        height: 26
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 702c6a2e173eb41a980458eaddcad714
+      spriteID: a4f897a54d9ed434299e08b7b3578dc6
       vertices: []
       indices: 
       edges: []
@@ -152,18 +152,18 @@ TextureImporter:
       name: PGhost-side_3
       rect:
         serializedVersion: 2
-        x: 35
-        y: 34
-        width: 26
-        height: 26
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5adde87fa14e4def86dd5af82bfbc5e
+      spriteID: 57177408d566842b6bf209de9e61ab82
       vertices: []
       indices: 
       edges: []
@@ -172,18 +172,18 @@ TextureImporter:
       name: PGhost-side_4
       rect:
         serializedVersion: 2
-        x: 3
-        y: 1
-        width: 26
-        height: 26
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10b32f1a7193848248c6eeaea010a3db
+      spriteID: 110b7bd47898a44e492aa2436c113993
       vertices: []
       indices: 
       edges: []
