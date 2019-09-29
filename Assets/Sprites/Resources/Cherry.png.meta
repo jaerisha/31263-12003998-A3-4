@@ -67,7 +67,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -78,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -91,10 +91,10 @@ TextureImporter:
       name: Cherry_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 37
-        width: 24
-        height: 25
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -102,7 +102,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a976d2ca50454e5a916e2573beb6d50
+      spriteID: 649984f2cac574fab88b0a722f7dda3b
       vertices: []
       indices: 
       edges: []
@@ -111,10 +111,10 @@ TextureImporter:
       name: Cherry_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 36
-        width: 24
-        height: 25
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -122,7 +122,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 452c553dde1a94caab4dfba7ca9a3052
+      spriteID: 2b852f1dd53f24e42b43588ef08bc709
       vertices: []
       indices: 
       edges: []
@@ -131,10 +131,10 @@ TextureImporter:
       name: Cherry_2
       rect:
         serializedVersion: 2
-        x: 3
-        y: 3
-        width: 24
-        height: 25
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,7 +142,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10e0f6dec012e426abb3dbb485ad5fae
+      spriteID: 58ebc6581d4ff4cdab8b009864ea6660
       vertices: []
       indices: 
       edges: []
@@ -151,10 +151,10 @@ TextureImporter:
       name: Cherry_3
       rect:
         serializedVersion: 2
-        x: 35
-        y: 2
-        width: 24
-        height: 25
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,7 +162,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c85498384d2c64e7896db3c818748f9f
+      spriteID: 95c4ff00414314b5bbc8079927cc428c
       vertices: []
       indices: 
       edges: []
