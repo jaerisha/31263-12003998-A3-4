@@ -47,3 +47,6 @@ TagManager:
   - name: Pellets
     uniqueID: 1657239471
     locked: 0
+  - name: Player
+    uniqueID: 3790025561
+    locked: 0

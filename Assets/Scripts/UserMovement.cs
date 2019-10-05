@@ -5,25 +5,36 @@ using UnityEngine;
 public class UserMovement : MonoBehaviour
 {
     public AnimationController animationController;
+    private Rigidbody2D rigidbody2D;
+    public float playerSpeed = 1f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        Vector2 movement = GetDirection().normalized;
+        SetDirection(movement);
+        Vector2 force = movement * playerSpeed * SpeedManager.SpeedModifier;
+        Debug.Log(force);
+        rigidbody2D.velocity = force;
+    }
 
-        if(horizontalInput > 0f) 
+    Vector3 GetDirection() {
+        return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    }
+
+    void SetDirection(Vector2 movement) {
+        if(movement.x > 0f) 
             animationController.SetDirection(2);
-        if(verticalInput > 0f) 
+        if(movement.y > 0f) 
             animationController.SetDirection(0);
-        if(horizontalInput < 0f)
+        if(movement.x < 0f)
             animationController.SetDirection(3);
-        if(verticalInput < 0f) 
+        if(movement.y < 0f) 
             animationController.SetDirection(1);
     }
 }
