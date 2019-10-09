@@ -44,8 +44,14 @@ TagManager:
   - name: Walls
     uniqueID: 609399379
     locked: 0
+  - name: Floor
+    uniqueID: 3510183819
+    locked: 0
   - name: Pellets
     uniqueID: 1657239471
+    locked: 0
+  - name: Ghosts
+    uniqueID: 3491440677
     locked: 0
   - name: Player
     uniqueID: 3790025561

@@ -28,13 +28,22 @@ public class UserMovement : MonoBehaviour
     }
 
     void SetDirection(Vector2 movement) {
-        if(movement.x > 0f) 
+        if(movement.x > 0f){    //RIGHT
             animationController.SetDirection(2);
-        if(movement.y > 0f) 
+            transform.eulerAngles = Vector3.zero;
+        } 
+        if(movement.y > 0f){     //UP
             animationController.SetDirection(0);
-        if(movement.x < 0f)
+            transform.eulerAngles = new Vector3(0,0,90);
+        }
+        if(movement.x < 0f){     //LEFT
             animationController.SetDirection(3);
-        if(movement.y < 0f) 
+            transform.eulerAngles = new Vector3(0,0,180);
+            transform.localRotation = Quaternion.Euler(0,180,0);
+        }
+        if(movement.y < 0f){     //DOWN
             animationController.SetDirection(1);
+            transform.eulerAngles = new Vector3(0,0,270);
+        }
     }
 }
