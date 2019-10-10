@@ -5,25 +5,51 @@ using UnityEngine;
 public class UserMovement : MonoBehaviour
 {
     public AnimationController animationController;
+    private Rigidbody2D rigidbody2D;
+    public float playerSpeed = 1f;
+    public NodeGridGenerator nodeGridGenerator;
+    private Node currentNode;
+    public int startX, startY;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        // currentNode = nodeGridGenerator.nodes[startX, startY];
+        // transform.Translate(currentNode.worldPos, Space.World);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        // nodeGridGenerator.nodes[0,0]
+        Vector2 movement = GetDirection().normalized;
+        SetDirection(movement);
+        Vector2 force = movement * playerSpeed * SpeedManager.SpeedModifier;
+        rigidbody2D.velocity = force;
+    }
 
-        if(horizontalInput > 0f) 
+    Vector3 GetDirection() {
+        return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    }
+
+    void SetDirection(Vector2 movement) {
+        if(movement.x > 0f){    //RIGHT
             animationController.SetDirection(2);
-        if(verticalInput > 0f) 
+            transform.eulerAngles = Vector3.zero;
+        } 
+        if(movement.y > 0f){     //UP
             animationController.SetDirection(0);
-        if(horizontalInput < 0f)
+            transform.eulerAngles = new Vector3(0,0,90);
+        }
+        if(movement.x < 0f){     //LEFT
             animationController.SetDirection(3);
-        if(verticalInput < 0f) 
+            transform.eulerAngles = new Vector3(0,0,180);
+            transform.localRotation = Quaternion.Euler(0,180,0);
+        }
+        if(movement.y < 0f){     //DOWN
             animationController.SetDirection(1);
+            transform.eulerAngles = new Vector3(0,0,270);
+        }
     }
 }

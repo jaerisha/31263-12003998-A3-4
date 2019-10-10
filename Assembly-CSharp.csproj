@@ -54,6 +54,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AnimationController.cs" />
+     <Compile Include="Assets\Scripts\AStar.cs" />
+     <Compile Include="Assets\Scripts\Node.cs" />
+     <Compile Include="Assets\Scripts\NodeGridGenerator.cs" />
+     <Compile Include="Assets\Scripts\SpeedManager.cs" />
      <Compile Include="Assets\Scripts\UserMovement.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/jelly/Dev/CGD/31263-12003998-A3/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
