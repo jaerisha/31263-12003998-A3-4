@@ -10,7 +10,7 @@ public class UserMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -19,7 +19,6 @@ public class UserMovement : MonoBehaviour
         Vector2 movement = GetDirection().normalized;
         SetDirection(movement);
         Vector2 force = movement * playerSpeed * SpeedManager.SpeedModifier;
-        Debug.Log(force);
         rigidbody2D.velocity = force;
     }
 
