@@ -10,7 +10,7 @@ public class NodeGridGenerator : MonoBehaviour
     public List<Tilemap> obstacleLayers;
     public Tilemap walls;
     public GameObject nodePrefab;
-    public int startScanX = -20, startScanY = -12, scanFinishX = 20, scanFinishY = 12;
+    public int startScanX, startScanY, scanFinishX, scanFinishY;
     public List<Node> unsortedNodes;
     public List<GameObject> uN;
     public Node[,] nodes;
@@ -24,12 +24,13 @@ public class NodeGridGenerator : MonoBehaviour
         unsortedNodes = new List<Node>();
         obstacleLayers = new List<Tilemap>();
         uN = new List<GameObject>();
+        CreateNodes();
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        CreateNodes();
+        
     }
 
     // Update is called once per frame
@@ -51,9 +52,11 @@ public class NodeGridGenerator : MonoBehaviour
                     TileBase tb2 = walls.GetTile(new Vector3Int(x,y,0));
                     if(tb2 != null){
                         foundObstacle = true;
-                        GameObject node = Instantiate(nodePrefab, new Vector3(x + 0.5f + gridBase.transform.position.x, y + 0.5f + gridBase.transform.position.y, 0), Quaternion.Euler(0,0,0));
+                        GameObject node = Instantiate(nodePrefab,
+                            new Vector3(x + gridBase.transform.position.x + 0.5f, y + gridBase.transform.position.y + 0.5f, 0), 
+                            Quaternion.Euler(0,0,0));
                         node.GetComponent<SpriteRenderer>().color = Color.red;
-                        Node obstacleNode = new Node(foundObstacle, x, y);
+                        Node obstacleNode = new Node(foundObstacle, gridX, gridY, this);
                         unsortedNodes.Add(obstacleNode);
                         uN.Add(node);
                         foundTilesOnLastPass = true;
@@ -61,7 +64,7 @@ public class NodeGridGenerator : MonoBehaviour
                 } else {
                     GameObject node = Instantiate(nodePrefab, new Vector3(x + 0.5f + gridBase.transform.position.x, y + 0.5f + gridBase.transform.position.y, 0), Quaternion.Euler(0,0,0));
                     node.GetComponent<SpriteRenderer>().color = Color.green;
-                    Node walkableNode = new Node(foundObstacle, x, y);
+                    Node walkableNode = new Node(foundObstacle, gridX, gridY, this);
                     unsortedNodes.Add(walkableNode);
                     uN.Add(node);
                     foundTilesOnLastPass = true;
@@ -78,24 +81,19 @@ public class NodeGridGenerator : MonoBehaviour
                 }
             } 
         }
-        Node bottomLeftNode = unsortedNodes[0];
+        int leftestX = int.MaxValue, lowermostestY = int.MaxValue;
         nodes = new Node[gridBoundX+1,gridBoundY+1];
-        Debug.Log(gridBoundY);
         foreach (Node n in unsortedNodes)
         {
-            if(bottomLeftNode.gridX > n.gridX && bottomLeftNode.gridY > n.gridY)
-                bottomLeftNode = n;
+            leftestX = Mathf.Min(leftestX, n.gridX);
+            lowermostestY = Mathf.Min(lowermostestY, n.gridY);
         }
         foreach (Node n in unsortedNodes)
         {
-            nodes[n.gridX + (int) (Mathf.Abs((float)bottomLeftNode.gridX)), n.gridY + (int) (Mathf.Abs((float)bottomLeftNode.gridY))] = n;
+            nodes[n.gridX + leftestX, n.gridY + lowermostestY] = n;
         }
         //insert neighboring tiles here
     }
-
-    // public Node NodeFromWorldPoint(Vector2 worldPos) {
-    //     return 
-    // }
 
     public List<Node> GetNeighbours(Node n, int width, int height) {
         List<Node> neighbours = new List<Node>();
