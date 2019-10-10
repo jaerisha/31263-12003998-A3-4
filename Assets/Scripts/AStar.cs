@@ -6,10 +6,12 @@ public class AStar : MonoBehaviour
 {
     public List<Node> openNodes;
     public List<Node> closedNodes;
+    public NodeGridGenerator gridGenerator;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gridGenerator = GetComponent<NodeGridGenerator>();   
     }
 
     // Update is called once per frame
@@ -19,6 +21,6 @@ public class AStar : MonoBehaviour
     }
 
     void FindAPath(Node start, Node end){
-        
+
     }
 }

@@ -69,7 +69,7 @@ public class NodeGridGenerator : MonoBehaviour
                 gridY++;
 
                 gridBoundX = gridX > gridBoundX ? gridX : gridBoundX;
-                gridBoundY = gridY > gridBoundY ? gridX : gridBoundY;
+                gridBoundY = gridY > gridBoundY ? gridY : gridBoundY;
 
                 if(foundTilesOnLastPass == true) {
                     gridX++;
@@ -78,18 +78,24 @@ public class NodeGridGenerator : MonoBehaviour
                 }
             } 
         }
-        // Debug.Log("GridBoundX = " + gridBoundX + " & GridBoundY = " + gridBoundY);
-        nodes = new Node[10000,10000];
-        Debug.Log(unsortedNodes.Count);
+        Node bottomLeftNode = unsortedNodes[0];
+        nodes = new Node[gridBoundX+1,gridBoundY+1];
+        Debug.Log(gridBoundY);
         foreach (Node n in unsortedNodes)
         {
-            Debug.Log(nodes[n.gridX, n.gridY]);
-            // Debug.Log("nodeX = " + n.gridX + " and nodeY = " + n.gridY);
-            // nodes[n.gridX, n.gridY] = n;
+            if(bottomLeftNode.gridX > n.gridX && bottomLeftNode.gridY > n.gridY)
+                bottomLeftNode = n;
         }
-        
+        foreach (Node n in unsortedNodes)
+        {
+            nodes[n.gridX + (int) (Mathf.Abs((float)bottomLeftNode.gridX)), n.gridY + (int) (Mathf.Abs((float)bottomLeftNode.gridY))] = n;
+        }
         //insert neighboring tiles here
     }
+
+    // public Node NodeFromWorldPoint(Vector2 worldPos) {
+    //     return 
+    // }
 
     public List<Node> GetNeighbours(Node n, int width, int height) {
         List<Node> neighbours = new List<Node>();
