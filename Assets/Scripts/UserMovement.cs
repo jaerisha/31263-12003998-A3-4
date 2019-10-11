@@ -22,7 +22,6 @@ public class UserMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // nodeGridGenerator.nodes[0,0]
         Vector2 movement = GetDirection().normalized;
         SetDirection(movement);
         Vector2 force = movement * playerSpeed * SpeedManager.SpeedModifier;

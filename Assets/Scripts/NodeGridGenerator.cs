@@ -95,7 +95,7 @@ public class NodeGridGenerator : MonoBehaviour
         //insert neighboring tiles here
     }
 
-    public List<Node> GetNeighbours(Node n, int width, int height) {
+    public List<Node> GetNeighbours(Node n) {
         List<Node> neighbours = new List<Node>();
 
         for(int x = -1; x <= 1; x++){
@@ -105,8 +105,8 @@ public class NodeGridGenerator : MonoBehaviour
                 int checkX = n.gridX;
                 int checkY = n.gridY;
                 
-                if(checkX >= 0 && checkX < width && checkY >= 0 && checkY < height) {
-                    // neighbours.Add(nodes[checkX, checkY]);
+                if(checkX >= 0 && checkX < gridBoundX && checkY >= 0 && checkY < gridBoundY) {
+                    neighbours.Add(nodes[checkX, checkY]);
                 }
             }
         }
