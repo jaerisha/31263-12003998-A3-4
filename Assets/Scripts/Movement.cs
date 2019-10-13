@@ -18,6 +18,10 @@ public abstract class Movement : MonoBehaviour
 	private void Update()
 	{
 		Vector2 inputDirection = GetDirection().normalized;
+		if(Mathf.Abs(inputDirection.x) == Mathf.Abs(inputDirection.y))
+		{
+			inputDirection.y = 0f;
+		}
 		if (inputDirection != Vector2.zero)
 		{
 			intendedDirection = inputDirection;
