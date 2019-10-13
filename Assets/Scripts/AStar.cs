@@ -1,70 +1,77 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AStar : MonoBehaviour
+public static class AStar
 {
-    public NodeGridGenerator gridGenerator;
+	public static List<Node> FindAPath(NodeGridGenerator nodeMap, Node start, Node end)
+	{
+		List<Node> openSet = new List<Node>();
+		HashSet<Node> closedSet = new HashSet<Node>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        gridGenerator = GetComponent<NodeGridGenerator>();   
-    }
+		openSet.Add(start);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		while(openSet.Count > 0)
+		{
+			Node node = openSet[0];
+			for(int i = 0; i < openSet.Count; i++)
+			{
+				if(openSet[i].fCost <= node.fCost)
+				{
+					if(openSet[i].hCost < node.hCost)
+					{
+						node = openSet[i];
+					}
+				}
+				openSet.Remove(node);
+				closedSet.Add(node);
 
-    void FindAPath(Node start, Node end){
-        List<Node> openSet = new List<Node>();
-        HashSet<Node> closedSet = new HashSet<Node>();
+				if(node == end)
+				{
+					return RetracePath(start, end);
+				}
 
-        openSet.Add(start);
+				foreach (Node neighbour in nodeMap.GetNeighbours(node))
+				{
+					if(!neighbour.walkable
+						|| closedSet.Contains(neighbour)) continue;
 
-        while(openSet.Count > 0) {
-            Node node = openSet[0];
-            for(int i = 0; i < openSet.Count; i++) {
-                if(openSet[i].fCost <= node.fCost) {
-                    if(openSet[i].hCost < node.hCost){
-                        node = openSet[i];
-                    }
-                }
-                openSet.Remove(node);
-                closedSet.Add(node);
+					int newCostToNeighbour = node.gCost
+						+ GetDistance(nodeMap, node, neighbour);
+					if(newCostToNeighbour < neighbour.gCost
+						|| !openSet.Contains(neighbour))
+					{
+						neighbour.gCost = newCostToNeighbour;
+						neighbour.hCost = GetDistance(nodeMap, neighbour, end);
+						neighbour.parent = node;
 
-                if(node == end){
-                    //retrace path
-                    return;
-                }
+						if(!openSet.Contains(neighbour))
+						{
+							openSet.Add(neighbour);
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
 
-                foreach(Node neighbour in gridGenerator.GetNeighbours(node)){
-                    if(!neighbour.walkable || closedSet.Contains(neighbour))
-                        continue;
-                    int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
-                    if(newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)){
-                        neighbour.gCost = newCostToNeighbour;
-                        neighbour.hCost = GetDistance(neighbour, end);
-                        neighbour.parent = node;
+	private static List<Node> RetracePath(Node start, Node end)
+	{
+		List<Node> path = new List<Node>();
+		Node current = end;
 
-                        if(!openSet.Contains(neighbour)) {
-                            openSet.Add(neighbour);
-                        }
-                    }
-                }
-            }
-        }
-    }
+		while (current != start)
+		{
+			path.Add(current);
+			current = current.parent;
+		}
+		path.Reverse();
+		return path;
+	}
 
-    int GetDistance(Node a, Node b) {
-        int xDistance = Mathf.Abs(a.gridX - b.gridX);
-        int yDistance = Mathf.Abs(a.gridY - b.gridY);
-        
-        if(xDistance > yDistance)
-            return 14 * yDistance + 10 * (xDistance - yDistance);
-        else
-            return 14 * xDistance + 10 * (yDistance - xDistance);
-    }
+	private static int GetDistance(NodeGridGenerator nodeMap, Node a, Node b)
+	{
+		if (nodeMap.MatchingPortal(a) == b) return 0;
+		return 1;
+	}
 }

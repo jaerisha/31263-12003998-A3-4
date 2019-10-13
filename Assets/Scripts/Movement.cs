@@ -3,15 +3,14 @@
 public abstract class Movement : MonoBehaviour
 {
 	public AnimationController animationController;
-	public NodeGridGenerator nodeGridGenerator;
+	public NodeGridGenerator nodeGrid;
 	public float speed = 1f;
-	private Node targetNode;
-	private Vector2 intendedDirection;
+	public Node targetNode;
+	protected Vector2 intendedDirection;
 	
 	private void Start()
 	{
-		targetNode = nodeGridGenerator.GetClosestNode(WorldPosition);
-		Debug.Log($"Current node: {targetNode}");
+		targetNode = nodeGrid.GetClosestNode(WorldPosition);
 		gameObject.transform.position = targetNode.WorldPosition;
 	}
 
@@ -24,8 +23,7 @@ public abstract class Movement : MonoBehaviour
 		}
 		targetNode.Draw(Color.red);
 	}
-
-	// Update is called once per frame
+	
 	private void FixedUpdate()
 	{
 		Move();
@@ -35,15 +33,27 @@ public abstract class Movement : MonoBehaviour
 	{
 		if (WorldPosition == targetNode.WorldPosition)
 		{
-			SetDirection(intendedDirection);
-			if (intendedDirection == Vector2.zero) return;
+			if (intendedDirection == Vector2.zero)
+			{
+				return;
+			}
+			else
+			{
+				SetDirection(intendedDirection);
+			}
+			Node otherPortal = nodeGrid.MatchingPortal(targetNode);
+			if (otherPortal != null)
+			{
+				targetNode = otherPortal;
+				transform.position = targetNode.WorldPosition;
+			}
 			Node nextTargetNode = CheckNode(intendedDirection);
-			nextTargetNode.Draw(Color.green);
-			if (!nextTargetNode.walkable)
+			if (nextTargetNode == null || !nextTargetNode.walkable)
 			{
 				intendedDirection = Vector2.zero;
 				return;
 			}
+			nextTargetNode.Draw(Color.green);
 			targetNode = nextTargetNode;
 		}
 		else
@@ -72,8 +82,12 @@ public abstract class Movement : MonoBehaviour
 		int yMove = (int)movement.y;
 		int x = targetNode.gridX + xMove;
 		int y = targetNode.gridY + yMove;
-		Node targetnode = nodeGridGenerator.NodeAt(x, y);
-		return targetnode != null ? targetnode : targetNode;
+		Node nextNode = nodeGrid.NodeAt(x, y);
+		if (nextNode != null)
+		{
+			return nextNode;
+		}
+		return null;
 	}
 
 	private Vector3 WorldPosition

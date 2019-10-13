@@ -6,24 +6,26 @@ public class Node
 	public int gridX, gridY;
 	public int gCost, hCost;
 	public Node parent;
-	public NodeGridGenerator nodeGridGenerator;
+	public NodeGridGenerator nodeGrid;
+	public int portalID;
 
 	public Node(bool walkable, int gridX, int gridY,
-		NodeGridGenerator nodeGridGenerator){
+		NodeGridGenerator nodeGridGenerator, int portalID){
 		this.walkable = walkable;
 		this.gridX = gridX;
 		this.gridY = gridY;
-		this.nodeGridGenerator = nodeGridGenerator;
+		this.nodeGrid = nodeGridGenerator;
+		this.portalID = portalID;
 	}
 
-	public int fCost { get { return gCost + fCost; } }
+	public int fCost => gCost + hCost;
 
 	public Vector3 WorldPosition
 	{
 		get
 		{
-			return nodeGridGenerator.transform.position
-			   + Vector3.one * nodeGridGenerator.tileOffset
+			return nodeGrid.OffsetTiles()
+			   + Vector3.one * nodeGrid.nodeSize / 2f
 			   + new Vector3(gridX, gridY, 0);
 		}
 	}

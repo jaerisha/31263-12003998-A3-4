@@ -5,23 +5,25 @@ using UnityEngine.Tilemaps;
 public class NodeGridGenerator : MonoBehaviour
 {
 	public Grid gridBase;
-	public Tilemap floor;
 	public List<Tilemap> obstacleLayers;
-	public Tilemap walls;
+	public Tilemap floor, walls;
+	public List<Tilemap> portalLayers;
 	public GameObject nodePrefab;
 	public int startScanX, startScanY, scanFinishX, scanFinishY;
-	public List<Node> unsortedNodes;
 	private Node[,] nodes;
-	public int gridBoundX = 0, gridBoundY = 0;
-	public float tileOffset = 0.5f;
+	private List<List<Node>> portals;
+	public float nodeSize = 1f;
 
 	/// <summary>
 	/// Awake is called when the script instance is being loaded.
 	/// </summary>
 	void Awake()
 	{
-		unsortedNodes = new List<Node>();
 		obstacleLayers = new List<Tilemap>();
+		int gridWidth = scanFinishX - startScanX;
+		int gridHeight = scanFinishY - startScanY;
+		nodes = new Node[gridWidth, gridHeight];
+		portals = new List<List<Node>>();
 		CreateNodes();
 	}
 
@@ -34,36 +36,59 @@ public class NodeGridGenerator : MonoBehaviour
 		{
 			for(int y = startScanY; y < scanFinishY; y++)
 			{
-				TileBase tb2 = walls.GetTile(new Vector3Int(x, y, 0));
-				bool foundObstacle = tb2 != null;
-				Node obstacleNode = new Node(!foundObstacle, gridX, gridY, this);
-				unsortedNodes.Add(obstacleNode);
+				Vector3Int position = new Vector3Int(x, y, 0);
+				TileBase floorTile = floor.GetTile(position);
+				TileBase wallTile = walls.GetTile(position);
+				int portalID = GetPortalID(position);
+				bool walkable
+					= wallTile == null
+					&& (floorTile != null || portalID >= 0);
+				Node newNode = new Node(walkable, gridX, gridY, this, portalID);
+				nodes[gridX, gridY] = newNode;
+				if (portalID >= 0)
+				{
+					AddToPortals(newNode);
+				}
 				gridY++;
-
-				gridBoundX = gridX > gridBoundX ? gridX : gridBoundX;
-				gridBoundY = gridY > gridBoundY ? gridY : gridBoundY;
 			}
 			gridX++;
 			gridY = 0;
 		}
-		//Debug.Log("gridX = " + gridX);
-		//Debug.Log("gridY = " + gridY);
-		//Debug.Log("gridBoundX = " + gridBoundX);
-		//Debug.Log("gridBoundY = " + gridBoundY);
+	}
 
-		int leftestX = int.MaxValue, lowermostestY = int.MaxValue;
-		nodes = new Node[gridBoundX,gridBoundY];
+	public Node MatchingPortal(Node n)
+	{
+		int id = n.portalID;
+		if (id < 0 || id >= portals.Count) return null;
 
-		//Debug.Log("Nodes length: " + nodes.Length);
-		foreach (Node n in unsortedNodes)
+		List<Node> matchingPortals = portals[id];
+		for (int i = 0; i < matchingPortals.Count; i++)
 		{
-			leftestX = Mathf.Min(leftestX, n.gridX);
-			lowermostestY = Mathf.Min(lowermostestY, n.gridY);
+			if (matchingPortals[i] != n) return matchingPortals[i];
 		}
-		foreach (Node n in unsortedNodes)
+		return null;
+	}
+
+	private void AddToPortals(Node n)
+	{
+		int id = n.portalID;
+		if (id < 0 || id >= portalLayers.Count) return;
+
+		while (portals.Count <= id)
 		{
-			nodes[n.gridX + leftestX, n.gridY + lowermostestY] = n;
+			portals.Add(new List<Node>());
 		}
+
+		portals[id].Add(n);
+	}
+
+	private int GetPortalID(Vector3Int position)
+	{
+		for (int i = 0; i < portalLayers.Count; i++)
+		{
+			if (portalLayers[i].GetTile(position)) return i;
+		}
+		return -1;
 	}
 
 	public List<Node> GetNeighbours(Node n) {
@@ -71,15 +96,16 @@ public class NodeGridGenerator : MonoBehaviour
 
 		for(int x = -1; x <= 1; x++){
 			for(int y = -1; y <= 1; y++) {
-				if(x == 0 && y == 0) continue;
-
-				int checkX = n.gridX;
-				int checkY = n.gridY;
-				
-				if(checkX >= 0 && checkX < gridBoundX && checkY >= 0 && checkY < gridBoundY) {
-					neighbours.Add(nodes[checkX, checkY]);
-				}
+				if (Mathf.Abs(x) == Mathf.Abs(y)) continue;
+				Node neighbour = NodeAt(n.gridX + x, n.gridY + y);
+				if (neighbour == null) continue;
+				neighbours.Add(neighbour);
 			}
+		}
+		Node matchingPortal = MatchingPortal(n);
+		if (matchingPortal != null)
+		{
+			neighbours.Add(matchingPortal);
 		}
 		return neighbours;
 	}
@@ -100,9 +126,19 @@ public class NodeGridGenerator : MonoBehaviour
 					closestDistance = dist;
 					closestNode = n;
 				}
+
+				if (closestDistance <= nodeSize * nodeSize)
+				{
+					return closestNode;
+				}
 			}
 		}
 		return closestNode;
+	}
+
+	public Vector3 OffsetTiles()
+	{
+		return transform.position + new Vector3(startScanX, startScanY, 0f);
 	}
 
 	public Node NodeAt(int x, int y)
