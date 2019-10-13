@@ -5791,11 +5791,11 @@ MonoBehaviour:
     type: 3}
   startScanX: 0
   startScanY: 0
-  scanFinishX: 40
-  scanFinishY: 24
-  uN: []
+  scanFinishX: 38
+  scanFinishY: 23
   gridBoundX: 0
   gridBoundY: 0
+  tileOffset: 0.5
 --- !u!1001 &213242212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15871,9 +15871,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1095500665}
   - component: {fileID: 1095500664}
-  - component: {fileID: 1095500667}
   - component: {fileID: 1095500666}
   - component: {fileID: 1095500668}
+  - component: {fileID: 1095500669}
+  - component: {fileID: 1095500667}
   m_Layer: 0
   m_Name: PinkGhost
   m_TagString: Untagged
@@ -15953,7 +15954,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -15967,29 +15968,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!50 &1095500667
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &1095500667
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1095500663}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67c7b30d98554620abbe0ddc8c2c828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1095500668}
 --- !u!95 &1095500668
 Animator:
   serializedVersion: 3
@@ -16000,7 +15993,7 @@ Animator:
   m_GameObject: {fileID: 1095500663}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4ebecf1c23a084ab488c5f2e5a500f02, type: 2}
+  m_Controller: {fileID: 9100000, guid: 65e61b891efa28c4db66f2496a82f71b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -16009,6 +16002,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1095500669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095500663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba2ba27acfcd9b439203c4e580ebf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationController: {fileID: 1095500667}
+  nodeGridGenerator: {fileID: 212582231}
+  speed: 5
 --- !u!1001 &1105189373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16179,9 +16187,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1116965249}
   - component: {fileID: 1116965248}
-  - component: {fileID: 1116965251}
   - component: {fileID: 1116965250}
   - component: {fileID: 1116965252}
+  - component: {fileID: 1116965253}
+  - component: {fileID: 1116965251}
   m_Layer: 0
   m_Name: RedGhost
   m_TagString: Untagged
@@ -16261,7 +16270,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -16275,29 +16284,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!50 &1116965251
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &1116965251
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116965247}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67c7b30d98554620abbe0ddc8c2c828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1116965252}
 --- !u!95 &1116965252
 Animator:
   serializedVersion: 3
@@ -16308,7 +16309,7 @@ Animator:
   m_GameObject: {fileID: 1116965247}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 52b950e634ad54f2a8e4da74275645ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: a17d0e73e7ec94e459bd6609f5a4061f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -16317,6 +16318,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1116965253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116965247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba2ba27acfcd9b439203c4e580ebf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationController: {fileID: 1116965251}
+  nodeGridGenerator: {fileID: 212582231}
+  speed: 5
 --- !u!1001 &1117905450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20728,8 +20744,9 @@ GameObject:
   - component: {fileID: 1541876465}
   - component: {fileID: 1541876464}
   - component: {fileID: 1541876467}
-  - component: {fileID: 1541876466}
   - component: {fileID: 1541876468}
+  - component: {fileID: 1541876469}
+  - component: {fileID: 1541876466}
   m_Layer: 0
   m_Name: 'GreenGhost '
   m_TagString: Untagged
@@ -20799,27 +20816,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1541876466
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &1541876466
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541876463}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67c7b30d98554620abbe0ddc8c2c828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1541876468}
 --- !u!61 &1541876467
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20830,7 +20839,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -20844,7 +20853,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!95 &1541876468
 Animator:
@@ -20856,7 +20865,7 @@ Animator:
   m_GameObject: {fileID: 1541876463}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1da69a48bd23842799446ec55a430194, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7a0f073da3fac0e46a763c92880a0d18, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -20865,6 +20874,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1541876469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541876463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba2ba27acfcd9b439203c4e580ebf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationController: {fileID: 1541876466}
+  nodeGridGenerator: {fileID: 212582231}
+  speed: 5
 --- !u!1001 &1547655429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26929,8 +26953,8 @@ GameObject:
   - component: {fileID: 1689819044}
   - component: {fileID: 1689819045}
   - component: {fileID: 1689819046}
-  - component: {fileID: 1689819047}
   - component: {fileID: 1689819048}
+  - component: {fileID: 1689819047}
   m_Layer: 0
   m_Name: MrsPacman
   m_TagString: Untagged
@@ -27009,14 +27033,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1689819041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ceba16dd48c742ce9e870d88ae9974a, type: 3}
+  m_Script: {fileID: 11500000, guid: cba2ba27acfcd9b439203c4e580ebf24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: 1689819046}
-  playerSpeed: 1
   nodeGridGenerator: {fileID: 212582231}
-  startX: 18
-  startY: 7
+  speed: 5
 --- !u!95 &1689819045
 Animator:
   serializedVersion: 3
@@ -27027,7 +27049,7 @@ Animator:
   m_GameObject: {fileID: 1689819041}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 81d723e0cfaae4bfaa6ec885a4cbad76, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5a1e3de613e92024c80f976737cfdab2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -27069,7 +27091,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 0
 --- !u!61 &1689819048
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27094,7 +27116,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.875, y: 0.875}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!1001 &1691581202
 PrefabInstance:
@@ -29040,6 +29062,7 @@ GameObject:
   - component: {fileID: 1834622716}
   - component: {fileID: 1834622715}
   - component: {fileID: 1834622720}
+  - component: {fileID: 1834622719}
   - component: {fileID: 1834622718}
   m_Layer: 0
   m_Name: BlueGhost
@@ -29129,27 +29152,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1834622718
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &1834622718
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834622714}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67c7b30d98554620abbe0ddc8c2c828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1834622715}
+--- !u!114 &1834622719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834622714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba2ba27acfcd9b439203c4e580ebf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationController: {fileID: 1834622718}
+  nodeGridGenerator: {fileID: 212582231}
+  speed: 5
 --- !u!61 &1834622720
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -29160,7 +29190,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -29174,7 +29204,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!1001 &1840062196
 PrefabInstance:
