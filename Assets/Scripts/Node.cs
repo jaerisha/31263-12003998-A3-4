@@ -25,7 +25,7 @@ public class Node
 		get
 		{
 			return nodeGrid.OffsetTiles()
-			   + (Vector3)Vector2.one * nodeGrid.HalfNodeSize
+			   + Vector3.one * nodeGrid.nodeSize / 2f
 			   + new Vector3(gridX, gridY, 0);
 		}
 	}
@@ -45,10 +45,5 @@ public class Node
 		Vector3 right = left + Vector3.right * nodeSize;
 		Debug.DrawLine(bottom, top, col);
 		Debug.DrawLine(left, right, col);
-	}
-
-	public float DistanceFromNode(Node other)
-	{
-		return Vector3.Distance(WorldPosition, other.WorldPosition);
 	}
 }

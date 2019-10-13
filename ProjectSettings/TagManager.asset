@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - GhostPellet
-  - Ghost
-  - Pellet
-  - Cherry
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -41,11 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Floor
-    uniqueID: 3510183819
-    locked: 0
   - name: Walls
     uniqueID: 609399379
+    locked: 0
+  - name: Floor
+    uniqueID: 3510183819
     locked: 0
   - name: Pellets
     uniqueID: 1657239471

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
@@ -7,18 +6,15 @@ public abstract class Movement : MonoBehaviour
 	public NodeGridGenerator nodeGrid;
 	public float speed = 1f;
 	public Node targetNode;
-	protected Node previousNode;
 	protected Vector2 intendedDirection;
-	protected bool canTravelThroughWalls;
 	
 	private void Start()
 	{
 		targetNode = nodeGrid.GetClosestNode(WorldPosition);
-		previousNode = targetNode;
 		gameObject.transform.position = targetNode.WorldPosition;
 	}
 
-	protected virtual void Update()
+	private void Update()
 	{
 		Vector2 inputDirection = GetDirection().normalized;
 		if (inputDirection != Vector2.zero)
@@ -48,40 +44,28 @@ public abstract class Movement : MonoBehaviour
 			Node otherPortal = nodeGrid.MatchingPortal(targetNode);
 			if (otherPortal != null)
 			{
-				previousNode = targetNode;
 				targetNode = otherPortal;
 				transform.position = targetNode.WorldPosition;
 			}
 			Node nextTargetNode = CheckNode(intendedDirection);
-			if (nextTargetNode == null)
+			if (nextTargetNode == null || !nextTargetNode.walkable)
 			{
-				Stop();
+				intendedDirection = Vector2.zero;
 				return;
 			}
-			else
-			{
-				if (!canTravelThroughWalls && !nextTargetNode.walkable)
-				{
-					Stop();
-					return;
-				}
-			}
 			nextTargetNode.Draw(Color.green);
-			previousNode = targetNode;
 			targetNode = nextTargetNode;
 		}
 		else
 		{
+			Vector3 previousPosition = WorldPosition;
 			WorldPosition = Vector3.MoveTowards(
 				WorldPosition,
 				targetNode.WorldPosition,
 				speed * Time.deltaTime);
+			Vector3 currentDirection = WorldPosition - previousPosition;
+			SetDirection(currentDirection);
 		}
-	}
-
-	protected virtual void Stop()
-	{
-		intendedDirection = Vector2.zero;
 	}
 
 	protected abstract Vector3 GetDirection();
@@ -92,10 +76,10 @@ public abstract class Movement : MonoBehaviour
 		animationController.SetDirection(angle);
 	}
 
-	protected Node CheckNode(Vector2 movement)
+	private Node CheckNode(Vector2 movement)
 	{
-		int xMove = Mathf.RoundToInt(movement.x);
-		int yMove = Mathf.RoundToInt(movement.y);
+		int xMove = (int)movement.x;
+		int yMove = (int)movement.y;
 		int x = targetNode.gridX + xMove;
 		int y = targetNode.gridY + yMove;
 		Node nextNode = nodeGrid.NodeAt(x, y);
@@ -106,7 +90,7 @@ public abstract class Movement : MonoBehaviour
 		return null;
 	}
 
-	protected Vector3 WorldPosition
+	private Vector3 WorldPosition
 	{
 		get
 		{
