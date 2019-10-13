@@ -5,9 +5,12 @@ public class ChasePacman : GhostMovement
 {
 	protected override Vector3 GetDirection()
 	{
+		if (targetNode == mrsPacman.targetNode) return GetRandomDirection();
+
 		List<Node> path = AStar.FindAPath(
 			nodeGrid, targetNode, mrsPacman.targetNode);
-		DrawPath(path);
+
+		nodeGrid.DrawPath(path);
 		if (path != null && path.Count > 0)
 		{
 			Node nextnode = path[0];
@@ -18,14 +21,6 @@ public class ChasePacman : GhostMovement
 			}
 			return nextnode.WorldPosition - targetNode.WorldPosition;
 		}
-		return Vector3.zero;
-	}
-
-	private void DrawPath(List<Node> path)
-	{
-		foreach (Node n in path)
-		{
-			n.Draw(Color.white);
-		}
+		return intendedDirection;
 	}
 }
