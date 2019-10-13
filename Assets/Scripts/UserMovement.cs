@@ -8,15 +8,19 @@ public class UserMovement : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     public float playerSpeed = 1f;
     public NodeGridGenerator nodeGridGenerator;
+    private Node[,] nodes;
     private Node currentNode;
     public int startX, startY;
+    private float offset = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
+        nodes = nodeGridGenerator.nodes;
         rigidbody2D = GetComponent<Rigidbody2D>();
-        // currentNode = nodeGridGenerator.nodes[startX, startY];
-        // transform.Translate(currentNode.worldPos, Space.World);
+        currentNode = nodes[startX, startY];
+        Debug.Log("Current x: " + currentNode.gridX + offset + " y: " + currentNode.gridY + offset);
+        gameObject.transform.position = new Vector3(currentNode.gridX + offset, currentNode.gridY + offset, 0);
     }
 
     // Update is called once per frame
@@ -24,10 +28,25 @@ public class UserMovement : MonoBehaviour
     {
         Vector2 movement = GetDirection().normalized;
         SetDirection(movement);
-        Vector2 force = movement * playerSpeed * SpeedManager.SpeedModifier;
-        rigidbody2D.velocity = force;
+        Move(movement);
+        // Debug.Log(transform.position);
+        // Debug.Log("Target x: " + target.gridX + offset + " y: " + target.gridY + offset);
+        
+        // Vector2 force = movement * playerSpeed * SpeedManager.SpeedModifier;
+        // rigidbody2D.velocity = force;
     }
 
+    void Move(Vector2 movement){
+        Node target = CheckNode(movement);
+        Vector2 currentPos, targetPos;
+        currentPos = new Vector2(currentNode.gridX + offset, currentNode.gridY);
+        targetPos = new Vector2(target.gridX + offset, target.gridY + offset);
+        if(movement.x == 0)
+            transform.position = Vector2.MoveTowards(currentPos, targetPos, movement.y*playerSpeed*Time.deltaTime);
+        else if(movement.y == 0)
+            transform.position = Vector2.MoveTowards(currentPos, targetPos, movement.x*playerSpeed*Time.deltaTime);
+        currentNode = target;
+    }
     Vector3 GetDirection() {
         return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
@@ -50,5 +69,22 @@ public class UserMovement : MonoBehaviour
             animationController.SetDirection(1);
             transform.eulerAngles = new Vector3(0,0,270);
         }
+    }
+
+    Node CheckNode(Vector2 movement){
+        if((movement.x < 0 || movement.x > 0) && movement.y == 0){
+            if(nodes[currentNode.gridX + (int) movement.x, currentNode.gridY].walkable == true){
+                return nodes[currentNode.gridX + (int) movement.x, currentNode.gridY];
+            } else {
+                return currentNode;
+            }
+        } else if((movement.y < 0 || movement.y > 0) && movement.x == 0) {
+            if(nodes[currentNode.gridX, currentNode.gridY + (int) movement.y].walkable == true) {
+                return nodes[currentNode.gridX, currentNode.gridY + (int) movement.y];
+            } else {
+                return currentNode;
+            }
+        }
+        return currentNode;
     }
 }

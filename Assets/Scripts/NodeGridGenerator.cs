@@ -42,7 +42,7 @@ public class NodeGridGenerator : MonoBehaviour
     void CreateNodes() {
         int gridX = 0;
         int gridY = 0;
-        bool foundTilesOnLastPass = false;
+        // bool foundTilesOnLastPass = false;
 
         for(int x = startScanX; x < scanFinishX; x++){
             for(int y = startScanY; y < scanFinishY; y++){
@@ -59,7 +59,7 @@ public class NodeGridGenerator : MonoBehaviour
                         Node obstacleNode = new Node(foundObstacle, gridX, gridY, this);
                         unsortedNodes.Add(obstacleNode);
                         uN.Add(node);
-                        foundTilesOnLastPass = true;
+                        // foundTilesOnLastPass = true;
                     }
                 } else {
                     GameObject node = Instantiate(nodePrefab, new Vector3(x + 0.5f + gridBase.transform.position.x, y + 0.5f + gridBase.transform.position.y, 0), Quaternion.Euler(0,0,0));
@@ -67,22 +67,28 @@ public class NodeGridGenerator : MonoBehaviour
                     Node walkableNode = new Node(foundObstacle, gridX, gridY, this);
                     unsortedNodes.Add(walkableNode);
                     uN.Add(node);
-                    foundTilesOnLastPass = true;
+                    // foundTilesOnLastPass = true;
                 }
                 gridY++;
 
                 gridBoundX = gridX > gridBoundX ? gridX : gridBoundX;
                 gridBoundY = gridY > gridBoundY ? gridY : gridBoundY;
-
-                if(foundTilesOnLastPass == true) {
+            } 
+            // if(foundTilesOnLastPass == true) {
                     gridX++;
                     gridY = 0;
-                    foundTilesOnLastPass = false;
-                }
-            } 
+                    // foundTilesOnLastPass = false;
+                // }
         }
+        Debug.Log("gridX = " + gridX);
+        Debug.Log("gridY = " + gridY);
+        Debug.Log("gridBoundX = " + gridBoundX);
+        Debug.Log("gridBoundY = " + gridBoundY);
+
         int leftestX = int.MaxValue, lowermostestY = int.MaxValue;
-        nodes = new Node[gridBoundX+1,gridBoundY+1];
+        nodes = new Node[gridBoundX,gridBoundY];
+
+        Debug.Log("Nodes length: " + nodes.Length);
         foreach (Node n in unsortedNodes)
         {
             leftestX = Mathf.Min(leftestX, n.gridX);
