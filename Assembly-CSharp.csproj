@@ -65,6 +65,9 @@
      <Compile Include="Assets\Scripts\RandomMovement.cs" />
      <Compile Include="Assets\Scripts\ReturnToStartMovement.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
      <Compile Include="Assets\Scripts\UserMovement.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
