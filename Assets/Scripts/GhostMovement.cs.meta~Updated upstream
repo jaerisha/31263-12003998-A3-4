@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Scripts/GhostMovement.cs.meta:Assets/Scripts/GhostMovement.cs.meta
+guid: 2735a429eb89f074ea34abcde277439c
+=======
+guid: cfc7f6159594f4eb486364d6e3cfe178
+>>>>>>> Stashed changes:Assets/Scripts/UIManager.cs.meta:Assets/Scripts/UIManager.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
@@ -6,24 +7,31 @@ public abstract class Movement : MonoBehaviour
 	public NodeGridGenerator nodeGrid;
 	public float speed = 1f;
 	public Node targetNode;
+	protected Node previousNode;
 	protected Vector2 intendedDirection;
-	
+	protected bool canTravelThroughWalls;
+
 	private void Start()
 	{
 		targetNode = nodeGrid.GetClosestNode(WorldPosition);
+		previousNode = targetNode;
 		gameObject.transform.position = targetNode.WorldPosition;
 	}
 
-	private void Update()
+	protected virtual void Update()
 	{
 		Vector2 inputDirection = GetDirection().normalized;
+		if(Mathf.Abs(inputDirection.x) == Mathf.Abs(inputDirection.y))	//Prevents diagonal movement
+		{
+			inputDirection.y = 0;
+		}
 		if (inputDirection != Vector2.zero)
 		{
 			intendedDirection = inputDirection;
 		}
 		targetNode.Draw(Color.red);
 	}
-	
+
 	private void FixedUpdate()
 	{
 		Move();
@@ -31,9 +39,9 @@ public abstract class Movement : MonoBehaviour
 
 	private void Move()
 	{
-		if (WorldPosition == targetNode.WorldPosition)
+		if (WorldPosition == targetNode.WorldPosition)	//if you are at your destination, look for the next target
 		{
-			if (intendedDirection == Vector2.zero)
+			if (intendedDirection == Vector2.zero)	//if there is no given direction just stop
 			{
 				return;
 			}
@@ -42,30 +50,42 @@ public abstract class Movement : MonoBehaviour
 				SetDirection(intendedDirection);
 			}
 			Node otherPortal = nodeGrid.MatchingPortal(targetNode);
-			if (otherPortal != null)
+			if (otherPortal != null)	//Teleporting the character to the matching portal
 			{
+				previousNode = targetNode;
 				targetNode = otherPortal;
 				transform.position = targetNode.WorldPosition;
 			}
 			Node nextTargetNode = CheckNode(intendedDirection);
-			if (nextTargetNode == null || !nextTargetNode.walkable)
+			if (nextTargetNode == null)	//Stops moving if the given node doesn't exist
 			{
-				intendedDirection = Vector2.zero;
+				Stop();
 				return;
 			}
+			else
+			{
+				if (!canTravelThroughWalls && !nextTargetNode.walkable)	//Also stops if it's a wall and Ms Pacman is not powered up
+				{
+					Stop();
+					return;
+				}
+			}
 			nextTargetNode.Draw(Color.green);
+			previousNode = targetNode;
 			targetNode = nextTargetNode;
 		}
-		else
+		else	//or if you are not yet at your destination, move
 		{
-			Vector3 previousPosition = WorldPosition;
 			WorldPosition = Vector3.MoveTowards(
 				WorldPosition,
 				targetNode.WorldPosition,
 				speed * Time.deltaTime);
-			Vector3 currentDirection = WorldPosition - previousPosition;
-			SetDirection(currentDirection);
 		}
+	}
+
+	protected virtual void Stop()
+	{
+		intendedDirection = Vector2.zero;
 	}
 
 	protected abstract Vector3 GetDirection();
@@ -76,10 +96,10 @@ public abstract class Movement : MonoBehaviour
 		animationController.SetDirection(angle);
 	}
 
-	private Node CheckNode(Vector2 movement)
+	protected Node CheckNode(Vector2 movement)	//Checking to see if the node exists at the given position
 	{
-		int xMove = (int)movement.x;
-		int yMove = (int)movement.y;
+		int xMove = Mathf.RoundToInt(movement.x);
+		int yMove = Mathf.RoundToInt(movement.y);
 		int x = targetNode.gridX + xMove;
 		int y = targetNode.gridY + yMove;
 		Node nextNode = nodeGrid.NodeAt(x, y);
@@ -90,7 +110,7 @@ public abstract class Movement : MonoBehaviour
 		return null;
 	}
 
-	private Vector3 WorldPosition
+	protected Vector3 WorldPosition
 	{
 		get
 		{
