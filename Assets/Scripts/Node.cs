@@ -4,7 +4,7 @@ public class Node
 {
 	public bool walkable;
 	public int gridX, gridY;
-	public int gCost, hCost;	//gCost = cost between start and current node, hCost = est. cost between current and target node
+	public int gCost, hCost;
 	public Node parent;
 	public NodeGridGenerator nodeGrid;
 	public int portalID;

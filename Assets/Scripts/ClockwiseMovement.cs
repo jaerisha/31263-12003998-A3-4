@@ -16,23 +16,23 @@ public class ClockwiseMovement : GhostMovement
 			path = AStar.FindAPath(nodeGrid, targetNode, targetCorner);
 		}
 
-		if (path != null && path.Count > 0)	//If you have a designated target, go there
+		if (path != null && path.Count > 0)
 		{
 			targetNode = path[0];
 		}
 
-		if (WorldPosition == targetNode.WorldPosition)	//If you have arrived at the destination
+		if (WorldPosition == targetNode.WorldPosition)
 		{
 			path.RemoveAt(0);
 			if (targetNode.portalID >= 0 && path.Count > 1)
 			{
 				path.RemoveAt(0);
-				transform.position = path[0].WorldPosition;	
+				transform.position = path[0].WorldPosition;
 			}
 			return GetDirection();
 		}
 
-		if (targetNode.portalID >= 0 && path.Count > 2)	//Skips to the node after the portal to prevent ghosts from getting stuck
+		if (targetNode.portalID >= 0 && path.Count > 2)
 		{
 
 			Node nextnode = path[2];
@@ -43,7 +43,7 @@ public class ClockwiseMovement : GhostMovement
 
 	private Node GetNextTarget()
 	{
-		targetCornerID = (targetCornerID + 1) % 4;	//getting the next target corner
+		targetCornerID = (targetCornerID + 1) % 4;
 
 		switch (targetCornerID)
 		{

@@ -18,7 +18,7 @@ public abstract class GhostMovement : Movement
 		Node randomNode = null;
 		neighbours.Remove(previousNode);
 		previousNode.Draw(Color.magenta);
-		while ((randomNode == null || !randomNode.walkable)	//If there is no current target to go to
+		while ((randomNode == null || !randomNode.walkable)
 			&& neighbours.Count > 0)
 		{
 			int randomIndex = Random.Range(0, neighbours.Count);

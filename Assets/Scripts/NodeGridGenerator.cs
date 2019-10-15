@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-/* Generating nodes from a tilemap was coded with reference to https://www.youtube.com/watch?v=htZFdfSLiYo */
 public class NodeGridGenerator : MonoBehaviour
 {
 	public Tilemap floorLayer, wallLayer, cornersLayer, startAreaLayer;
@@ -33,7 +32,7 @@ public class NodeGridGenerator : MonoBehaviour
 	private void CreateNodes()
 	{
 		int gridX = 0;
-		int gridY = 0;	//Determines array size
+		int gridY = 0;
 
 		for(int x = startScanX; x < scanFinishX; x++)
 		{
@@ -47,7 +46,7 @@ public class NodeGridGenerator : MonoBehaviour
 				int portalID = GetPortalID(position);
 				bool walkable
 					= wallTile == null
-					&& (floorTile != null || portalID >= 0);	//Just checking to see if this is a wall tile
+					&& (floorTile != null || portalID >= 0);
 				Node newNode = new Node(walkable, gridX, gridY, this, portalID);
 				nodes[gridX, gridY] = newNode;
 				if (portalID >= 0)

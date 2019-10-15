@@ -14,9 +14,9 @@ public class ChasePacman : GhostMovement
 		if (path != null && path.Count > 0)
 		{
 			Node nextnode = path[0];
-			if (nextnode.portalID >= 0 && path.Count > 2)	//Ensures that ghosts don't get stuck in the portals
+			if (nextnode.portalID >= 0 && path.Count > 2)
 			{
-				nextnode = path[2];		//Aim for the node after the portal
+				nextnode = path[2];
 				return -(nextnode.WorldPosition - targetNode.WorldPosition);
 			}
 			return nextnode.WorldPosition - targetNode.WorldPosition;

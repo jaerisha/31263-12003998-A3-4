@@ -58,7 +58,7 @@ public class UserMovement : Movement
 	protected override void Stop()
 	{
 		base.Stop();
-		// AudioManager.PlaySound(hitWallSound);
+		//  AudioManager.PlaySound(hitWallSound);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collider)
@@ -105,7 +105,8 @@ public class UserMovement : Movement
 			//activate special ability
 			Destroy(collider.gameObject);
 			AudioManager.PlaySound(cherrySound);
-			if(canUsePowerUp){
+			if(canUsePowerUp)
+			{
 				powerUpTimer = powerUpDuration;
 				speed *= 2f;
 				canTravelThroughWalls = true;

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-/* Was made with reference to A* algorithm tutorial by Sebastian Lague, which can be found at
-https://www.youtube.com/watch?v=mZfyt03LDH4&list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW&index=3 */
 public static class AStar
 {
 	public static List<Node> FindAPath(NodeGridGenerator nodeMap, Node start, Node end)
@@ -12,7 +10,7 @@ public static class AStar
 
 		openSet.Add(start);
 
-		while(openSet.Count > 0)	//while there are still nodes that haven't been checked
+		while(openSet.Count > 0)
 		{
 			Node node = openSet[0];
 			for(int i = 0; i < openSet.Count; i++)
@@ -35,7 +33,7 @@ public static class AStar
 				foreach (Node neighbour in nodeMap.GetNeighbours(node))
 				{
 					if(!neighbour.walkable
-						|| closedSet.Contains(neighbour)) continue;	
+						|| closedSet.Contains(neighbour)) continue;
 
 					int newCostToNeighbour = node.gCost
 						+ GetDistance(nodeMap, node, neighbour);

@@ -117,8 +117,6 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-<<<<<<< Updated upstream
-=======
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -169,14 +167,13 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
->>>>>>> Stashed changes
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 0
+  m_CanTransitionToSelf: 1
 --- !u!1101 &1101152505705097838
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -236,8 +233,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
-<<<<<<< Updated upstream
-=======
 --- !u!1101 &1101232252889091974
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -266,7 +261,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
->>>>>>> Stashed changes
 --- !u!1101 &1101261511967618166
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -278,12 +272,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: Angle
     m_EventTreshold: 135
-<<<<<<< Updated upstream
-=======
   - m_ConditionMode: 2
     m_ConditionEvent: Frightened
     m_EventTreshold: 0
->>>>>>> Stashed changes
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102895179463626886}
   m_Solo: 0
@@ -291,8 +282,6 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-<<<<<<< Updated upstream
-=======
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -318,15 +307,12 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
->>>>>>> Stashed changes
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-<<<<<<< Updated upstream
-=======
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101628011967090958
 AnimatorStateTransition:
@@ -358,7 +344,6 @@ AnimatorStateTransition:
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
->>>>>>> Stashed changes
   m_CanTransitionToSelf: 0
 --- !u!1101 &1101771253223058014
 AnimatorStateTransition:

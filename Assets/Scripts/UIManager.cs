@@ -5,15 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public void ToRecreatedScene() {
+    public void ToRecreatedScene()
+    {
         SceneManager.LoadScene(1);
     }
 
-    public void ToDIScene() {
+    public void ToDIScene()
+    {
         SceneManager.LoadScene(2);
     }
 
-    public void QuitGame() {
+    public void QuitGame()
+    {
         Application.Quit();
     }
 }

@@ -10296,7 +10296,6 @@ MonoBehaviour:
   hitWallSound: {fileID: 8300000, guid: b7501b40a229b44eeb73d97ad0f42601, type: 3}
   cherrySound: {fileID: 8300000, guid: f98faa0b27faa4ddc854b12a338ead4f, type: 3}
   powerUpDuration: 20
-  canUsePowerUp: 0
 --- !u!95 &1689819045
 Animator:
   serializedVersion: 3

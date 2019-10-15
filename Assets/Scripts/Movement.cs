@@ -10,7 +10,7 @@ public abstract class Movement : MonoBehaviour
 	protected Node previousNode;
 	protected Vector2 intendedDirection;
 	protected bool canTravelThroughWalls;
-
+	
 	private void Start()
 	{
 		targetNode = nodeGrid.GetClosestNode(WorldPosition);
@@ -21,9 +21,9 @@ public abstract class Movement : MonoBehaviour
 	protected virtual void Update()
 	{
 		Vector2 inputDirection = GetDirection().normalized;
-		if(Mathf.Abs(inputDirection.x) == Mathf.Abs(inputDirection.y))	//Prevents diagonal movement
+		if(Mathf.Abs(inputDirection.x) == Mathf.Abs(inputDirection.y))
 		{
-			inputDirection.y = 0;
+			inputDirection.y = 0f;
 		}
 		if (inputDirection != Vector2.zero)
 		{
@@ -31,7 +31,7 @@ public abstract class Movement : MonoBehaviour
 		}
 		targetNode.Draw(Color.red);
 	}
-
+	
 	private void FixedUpdate()
 	{
 		Move();
@@ -39,9 +39,9 @@ public abstract class Movement : MonoBehaviour
 
 	private void Move()
 	{
-		if (WorldPosition == targetNode.WorldPosition)	//if you are at your destination, look for the next target
+		if (WorldPosition == targetNode.WorldPosition)
 		{
-			if (intendedDirection == Vector2.zero)	//if there is no given direction just stop
+			if (intendedDirection == Vector2.zero)
 			{
 				return;
 			}
@@ -50,21 +50,21 @@ public abstract class Movement : MonoBehaviour
 				SetDirection(intendedDirection);
 			}
 			Node otherPortal = nodeGrid.MatchingPortal(targetNode);
-			if (otherPortal != null)	//Teleporting the character to the matching portal
+			if (otherPortal != null)
 			{
 				previousNode = targetNode;
 				targetNode = otherPortal;
 				transform.position = targetNode.WorldPosition;
 			}
 			Node nextTargetNode = CheckNode(intendedDirection);
-			if (nextTargetNode == null)	//Stops moving if the given node doesn't exist
+			if (nextTargetNode == null)
 			{
 				Stop();
 				return;
 			}
 			else
 			{
-				if (!canTravelThroughWalls && !nextTargetNode.walkable)	//Also stops if it's a wall and Ms Pacman is not powered up
+				if (!canTravelThroughWalls && !nextTargetNode.walkable)
 				{
 					Stop();
 					return;
@@ -74,7 +74,7 @@ public abstract class Movement : MonoBehaviour
 			previousNode = targetNode;
 			targetNode = nextTargetNode;
 		}
-		else	//or if you are not yet at your destination, move
+		else
 		{
 			WorldPosition = Vector3.MoveTowards(
 				WorldPosition,
@@ -96,7 +96,7 @@ public abstract class Movement : MonoBehaviour
 		animationController.SetDirection(angle);
 	}
 
-	protected Node CheckNode(Vector2 movement)	//Checking to see if the node exists at the given position
+	protected Node CheckNode(Vector2 movement)
 	{
 		int xMove = Mathf.RoundToInt(movement.x);
 		int yMove = Mathf.RoundToInt(movement.y);

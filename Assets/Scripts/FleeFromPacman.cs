@@ -9,8 +9,8 @@ public class FleeFromPacman : GhostMovement
 	{
 		Node otherPortal = nodeGrid.MatchingPortal(targetNode);
 		if (otherPortal != null) return intendedDirection;
-
-		if (mrsPacman.targetNode.DistanceFromNode(targetNode) > fleeDistance)	//Won't run away from Ms Pacman unless within a certain distance
+		
+		if (mrsPacman.targetNode.DistanceFromNode(targetNode) > fleeDistance)
 			return GetRandomDirection();
 
 		List<Node> neighbours = nodeGrid.GetNeighbours(targetNode);
