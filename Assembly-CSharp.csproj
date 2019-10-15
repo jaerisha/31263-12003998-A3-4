@@ -55,18 +55,25 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AnimationController.cs" />
      <Compile Include="Assets\Scripts\AStar.cs" />
+<<<<<<< Updated upstream
      <Compile Include="Assets\Scripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\ChasePacman.cs" />
      <Compile Include="Assets\Scripts\ClockwiseMovement.cs" />
+=======
+     <Compile Include="Assets\Scripts\ChasePacman.cs" />
+>>>>>>> Stashed changes
      <Compile Include="Assets\Scripts\FleeFromPacman.cs" />
      <Compile Include="Assets\Scripts\GhostMovement.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Node.cs" />
      <Compile Include="Assets\Scripts\NodeGridGenerator.cs" />
+<<<<<<< Updated upstream
      <Compile Include="Assets\Scripts\PelletGenerator.cs" />
      <Compile Include="Assets\Scripts\RandomMovement.cs" />
      <Compile Include="Assets\Scripts\ReturnToStartMovement.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
+=======
+>>>>>>> Stashed changes
      <Compile Include="Assets\Scripts\UserMovement.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/jelly/Dev/CGD/31263-12003998-A3/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
